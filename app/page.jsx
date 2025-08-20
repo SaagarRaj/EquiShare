@@ -6,6 +6,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import githubSVG from "../public/svg/github.svg";
+import linkedinSVG from "../public/svg/linkedin.png";
 
 export default function Home() {
   return (
@@ -167,11 +169,30 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="border-t bg-gray-50 py-12 text-center text-sm text-muted-foreground">
+      {/* <footer className="border-t bg-gray-50 py-12 text-center text-sm text-muted-foreground">
         Made by @
         <span className="font-stretch-ultra-expanded italic text-black">
           SRT
         </span>
+      </footer> */}
+      <footer className="flex items-center justify-center gap-3 border-t bg-gray-50 py-12 text-sm text-muted-foreground">
+        <p>
+          Made by @<span className="italic text-black">SRT</span>
+        </p>
+        <a
+          href="https://github.com/SaagarRaj"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image src={githubSVG} alt="GitHub" className="h-6 w-6" />
+        </a>
+        <a
+          href="https://www.linkedin.com/in/srt99/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image src={linkedinSVG} alt="LinkedIn" className="h-6 w-7" />
+        </a>
       </footer>
     </div>
   );
