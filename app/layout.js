@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
       <head>
         <link
           rel="icon"
-          href="/equishare-app/public/favicon_io/favicon-32x32.png"
+          href="/favicon_io/android-chrome-192x192.png"
           sizes="any"
         />
       </head>
