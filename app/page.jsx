@@ -175,7 +175,7 @@ export default function Home() {
           SRT
         </span>
       </footer> */}
-      <footer className="flex items-center justify-center gap-3 border-t bg-gray-50 py-12 text-sm text-muted-foreground">
+      <footer className="flex items-center justify-center gap-3 border-t bg-gray-50 py-12 text-sm text-muted-foreground ">
         <p>
           Made by @<span className="italic text-black">SRT</span>
         </p>

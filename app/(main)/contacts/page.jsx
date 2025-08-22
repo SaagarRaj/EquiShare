@@ -9,9 +9,12 @@ import { Plus, User, Users } from "lucide-react";
 import React, { useState } from "react";
 import { BarLoader } from "react-spinners";
 import Link from "next/link";
+import CreateGroupModal from "./_components/create-group-modal";
+import { useRouter } from "next/navigation";
 
 const ContactsPage = () => {
   const [isCreateGroupModalOpen, setIsCreateGroupModalOpen] = useState(false);
+  const router = useRouter();
   const { data, isLoading, error } = useConvexQueries(
     api.contacts.getAllContacts
   );
@@ -34,13 +37,13 @@ const ContactsPage = () => {
         </Button>
       </div>
 
+      {/* User Section */}
       <div className="grid grid-col-1 md:grid-cols-2 gap-6">
         <div>
           <h2 className="text-xl font-bold mb-4 flex items-center">
             <User className="mr-2 h-5 w-5" />
             People
           </h2>
-
           {users.length === 0 ? (
             <Card>
               <CardContent className="py-6 text-center text-muted-foreground">
@@ -76,7 +79,7 @@ const ContactsPage = () => {
             </div>
           )}
         </div>
-
+        {/* Group section */}
         <div>
           <h2 className="text-xl font-bold mb-4 flex items-center">
             <Users className="mr-2 h-5 w-5" />
@@ -116,6 +119,13 @@ const ContactsPage = () => {
           )}
         </div>
       </div>
+
+      {/* Create Group Modal */}
+      <CreateGroupModal
+        isOpen={isCreateGroupModalOpen}
+        onClose={() => setIsCreateGroupModalOpen(false)}
+        onSuccess={(groupId) => router.push(`/groups/${groupId}`)}
+      />
     </div>
   );
 };

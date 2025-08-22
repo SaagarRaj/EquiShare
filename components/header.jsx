@@ -43,7 +43,7 @@ const Header = () => {
                 Features
               </Link>
               <Link
-                href="#features"
+                href="#how-it-works"
                 className="text-sm font-medium hover:text-blue-600"
               >
                 How it works
