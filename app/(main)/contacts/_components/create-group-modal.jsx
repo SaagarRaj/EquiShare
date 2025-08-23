@@ -233,6 +233,7 @@ const CreateGroupModal = ({ isOpen, onClose, onSuccess }) => {
                     </Command>
                   </PopoverContent>
                 </Popover>
+
                 {selectedMembers.length === 0 && (
                   <p className="text-sm text-amber-600">
                     Add at least one member to the group
