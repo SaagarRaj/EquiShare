@@ -13,9 +13,11 @@ import { useConvexQueries } from "@/hooks/use-convex-queries";
 import { ChevronRight, PlusCircle, Users } from "lucide-react";
 import Link from "next/link";
 import { BarLoader } from "react-spinners";
-import ExpenseSummary from "../contacts/_components/expense-summary";
+
 import BalanceSummary from "./_components/balance-summary";
-import GroupList from "../contacts/_components/group-list";
+
+import { ExpenseSummary } from "./_components/expense-summary";
+import { GroupList } from "./_components/group-list";
 
 const DashboardPage = () => {
   const { data: balances, isLoading: balancesLoading } = useConvexQueries(

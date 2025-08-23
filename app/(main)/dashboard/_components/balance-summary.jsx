@@ -54,7 +54,7 @@ const BalanceSummary = ({ balances }) => {
       {hasOwed && (
         <div>
           <h3 className="font-medium flex text-sm items-center mb-3">
-            <ArrowDownCircle className="h-4 w-4 text-red-500 mr-2" /> You Owe
+            <ArrowDownCircle className="h-4 w-4 text-red-500 mr-2 " /> You Owe
           </h3>
           <div className="space-y-3">
             {oweDetails.youOwe.map((item) => (
