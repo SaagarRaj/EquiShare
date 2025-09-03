@@ -3,7 +3,7 @@ import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 
 export const getExpensesBetweenUsers = query({
-  args: { userId: v.id("user") },
+  args: { userId: v.id("users") },
   handler: async (ctx, { userId }) => {
     const me = await ctx.runQuery(internal.users.getCurrentUser);
     if (me._id === userId) throw new Error("Cannot query yourself");
