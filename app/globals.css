@@ -122,7 +122,7 @@
 }
 
 @utility gradient {
-  @apply bg-gradient-to-r from-blue-600 to-orange-600;
+  @apply bg-gradient-to-r from-blue-900 to-blue-400;
 }
 
 @utility gradient-title {

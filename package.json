@@ -6,7 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "inngest:dev": "inngest-cli@latest dev",
+    "inngest:deploy": "inngest-cli@latest deploy"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.31.1",
@@ -20,6 +22,7 @@
     "@radix-ui/react-slider": "^1.3.6",
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-tabs": "^1.1.13",
+    "@react-email/render": "^1.2.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
@@ -35,6 +38,7 @@
     "react-hook-form": "^7.62.0",
     "react-spinners": "^0.17.0",
     "recharts": "^3.1.2",
+    "resend": "^6.0.2",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.3.1",
     "zod": "^4.0.17"
