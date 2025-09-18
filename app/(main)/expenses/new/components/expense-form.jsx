@@ -27,6 +27,7 @@ import GroupSelector from "./group-selector";
 import ParticipantSelector from "./participant-selector";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import SplitSelector from "./split-selector";
+import { toast } from "sonner";
 
 const expenseSchema = z.object({
   description: z.string().min(1, "Description is required"),
@@ -93,10 +94,57 @@ const ExpenseForm = ({ type, onSuccess }) => {
     }
   }, [currentUser, participants]);
 
+  const onSubmit = async (data) => {
+    try {
+      const amount = parseFloat(data.amount);
+      const formattedSplits = splits.map((split) => ({
+        userId: split.userId,
+        amount: split.amount,
+        paid: split.userId === data.paidByUserId,
+      }));
+
+      const totalSplitAmount = formattedSplits.reduce(
+        (sum, split) => sum + split.amount,
+        0
+      );
+
+      const tolerance = 0.01;
+
+      if (Math.abs(totalSplitAmount - amount) > tolerance) {
+        toast.error(
+          `Split amounts don't add up to the total. Please adjust your splits`
+        );
+        return;
+      }
+
+      const groupId = type === "individual" ? undefined : data.groupId;
+      await createExpense.mutate({
+        description: data.description,
+        amount: amount,
+        category: data.category || "Other",
+        date: data.date.getDate(),
+        paidByUserId: data.paidByUserId,
+        splitType: data.splitType,
+        splits: formattedSplits,
+        groupId,
+        createdBy: currentUser._id,
+      });
+      toast.success("Expense created successfully");
+      reset();
+
+      const otherParticipant = participants.find(
+        (p) => p.id !== currentUser._id
+      );
+      const otherUserId = otherParticipant?.id;
+
+      if (onSuccess) onSuccess(type === "individual" ? otherUserId : groupId);
+    } catch (error) {
+      toast.error("Failed to create expense:" + error.message);
+    }
+  };
+
   if (!currentUser) return null;
-
-  const onSubmit = async (data) => {};
-
+  console.log("Curr User Data", currentUser._id);
   return (
     <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
       <div className="space-y-4">
@@ -244,7 +292,7 @@ const ExpenseForm = ({ type, onSuccess }) => {
           <Label>Split Type</Label>
 
           <Tabs
-            defaultValues="equal"
+            defaultvalues="equal"
             className=""
             onValueChange={(value) => setValue("splitType", value)}
           >
@@ -257,19 +305,37 @@ const ExpenseForm = ({ type, onSuccess }) => {
               <p className="text-sm text-muted-foreground">
                 Split equally among all participants
               </p>
-              <SplitSelector />
+              <SplitSelector
+                type="equal"
+                amount={parseFloat(amountValue) || 0}
+                participants={participants}
+                paidByUserId={paidByUserId}
+                onSplitsChange={setSplits}
+              />
             </TabsContent>
             <TabsContent value="percentage" className={"pt-4"}>
               <p className="text-sm text-muted-foreground">
                 Split by percentage
               </p>
-              <SplitSelector />
+              <SplitSelector
+                type="percentage"
+                amount={parseFloat(amountValue) || 0}
+                participants={participants}
+                paidByUserId={paidByUserId}
+                onSplitsChange={setSplits}
+              />
             </TabsContent>
             <TabsContent value="exact" className={"pt-4"}>
               <p className="text-sm text-muted-foreground">
                 Enter exact amounts
               </p>
-              <SplitSelector />
+              <SplitSelector
+                type="exact"
+                amount={parseFloat(amountValue) || 0}
+                participants={participants}
+                paidByUserId={paidByUserId}
+                onSplitsChange={setSplits}
+              />
             </TabsContent>
           </Tabs>
         </div>

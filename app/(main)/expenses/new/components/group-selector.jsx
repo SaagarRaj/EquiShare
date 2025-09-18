@@ -41,8 +41,6 @@ const GroupSelector = ({ onChange }) => {
     );
   }
 
-  console.log("GroupData", data);
-
   return (
     <div>
       <Select value={selectedGroupId} onValueChange={handleGroupChange}>

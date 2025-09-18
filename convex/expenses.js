@@ -143,10 +143,11 @@ export const createExpense = mutation({
       })
     ),
     groupId: v.optional(v.string()),
+    createdBy: v.optional(v.string()),
   },
 
   handler: async (ctx, args) => {
-    const user = ctx.runQuery(internal.users.getCurrentUser);
+    const user = await ctx.runQuery(internal.users.getCurrentUser);
 
     if (args.groupId) {
       const group = await ctx.db.get(args.groupId);
@@ -182,9 +183,9 @@ export const createExpense = mutation({
       date: args.date,
       paidByUserId: args.paidByUserId,
       splitType: args.splitType,
-      splits: args.splitType,
+      splits: args.splits,
       groupId: args.groupId,
-      createdBy: user._id,
+      createdBy: args.createdBy,
     });
 
     return expenseId;
