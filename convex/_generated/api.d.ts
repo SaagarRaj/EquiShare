@@ -21,6 +21,7 @@ import type * as groups from "../groups.js";
 import type * as groupsSRT from "../groupsSRT.js";
 import type * as inngest from "../inngest.js";
 import type * as seed from "../seed.js";
+import type * as settlements from "../settlements.js";
 import type * as users from "../users.js";
 
 /**
@@ -40,6 +41,7 @@ declare const fullApi: ApiFromModules<{
   groupsSRT: typeof groupsSRT;
   inngest: typeof inngest;
   seed: typeof seed;
+  settlements: typeof settlements;
   users: typeof users;
 }>;
 export declare const api: FilterApi<
